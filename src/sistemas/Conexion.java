@@ -72,4 +72,26 @@ public class Conexion {
         return listaAp;
     }
 
+    public static void insertar(String nombre, String material, String fecha) throws SQLException {
+
+        String consulta = "insert into reporteprestamo values('" + nombre + "','" + material + "','" + fecha + "')";
+        try {
+            PreparedStatement us = con.prepareStatement(consulta);
+            us.executeUpdate();
+        } catch (Exception e) {
+        }
+
+    }
+
+    public static void nuevoNombre(String nom) throws SQLException {
+
+        String sqlInsert = "insert into usuarios values('" + nom + "')";
+        try {
+            PreparedStatement st = con.prepareStatement(sqlInsert);
+            st.executeUpdate();
+        } catch (Exception e) {
+        }
+
+    }
+
 }
