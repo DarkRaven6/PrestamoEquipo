@@ -2,6 +2,8 @@ package sistemas;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -71,6 +73,14 @@ public class Conexion {
         }
         return listaAp;
     }
+    public static void eliminarUsuario(String name){
+           String sql = "delete from usuarios where nombre = '" + name + "'";
+           try {
+            PreparedStatement st = con.prepareStatement(sql);
+            st.executeUpdate();
+        } catch (Exception e) {
+        }
+    }
 
     public static void insertar(String nombre, String material, String fecha) throws SQLException {
 
@@ -94,4 +104,36 @@ public class Conexion {
 
     }
 
+    public void nuevoMaterial(String mat) {
+
+        String sqlIn = "insert into material values('" + mat + "')";
+        try {
+            PreparedStatement st = con.prepareStatement(sqlIn);
+            st.executeUpdate();
+        } catch (Exception e) {
+        }
+
+    }
+
+    public static void setFilas(DefaultTableModel mod) {
+
+        String sql = "select nombre,material,fecha from reporteprestamo";
+
+        try {
+            PreparedStatement st = con.prepareStatement(sql);
+            resultado = st.executeQuery();
+
+            Object datos[] = new Object[3];
+
+            while (resultado.next()) {
+                for (int i = 0; i < 3; i++) {
+                    datos[i] = resultado.getObject(i + 1);
+                }
+                mod.addRow(datos);
+            }
+            resultado.close();
+        } catch (Exception e) {
+
+        }
+    }
 }
