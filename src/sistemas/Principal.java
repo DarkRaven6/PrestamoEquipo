@@ -78,6 +78,7 @@ public class Principal extends javax.swing.JFrame {
         comboMaterial = new javax.swing.JComboBox<>();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
@@ -127,6 +128,13 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        jButton4.setText("Eliminar");
+        jButton4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton4MouseClicked(evt);
+            }
+        });
+
         jMenu1.setText("Agregar");
         jMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -154,6 +162,9 @@ public class Principal extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton4))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton3))
@@ -200,7 +211,9 @@ public class Principal extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(comboMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(53, 53, 53)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton4)
+                .addGap(21, 21, 21)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(53, 53, 53))
         );
@@ -247,6 +260,8 @@ public class Principal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "El registro no se agrego", "Mensaje de error", ERROR_MESSAGE);
         }
         txtFechaHora.setText(null);
+        comboUsuario.setSelectedIndex(0);
+        comboMaterial.setSelectedIndex(0);
         
 
 
@@ -272,7 +287,9 @@ public class Principal extends javax.swing.JFrame {
         String user = (String) comboUsuario.getSelectedItem();
         try {
             Conexion.eliminarUsuario(user);
+            JOptionPane.showMessageDialog(null, "El usuario fue eliminado");
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "El usuario no pudo ser eliminado");
         }
         
         comboUsuario.setSelectedIndex(0);
@@ -280,6 +297,20 @@ public class Principal extends javax.swing.JFrame {
         
 
     }//GEN-LAST:event_jButton3MouseClicked
+
+    private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
+
+        String mat = (String) comboMaterial.getSelectedItem();
+        try {
+            Conexion.eliminarMaterial(mat);
+            JOptionPane.showMessageDialog(null, "El material fue eliminado");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "El material no pudo ser eliminado");
+        }
+        
+        comboMaterial.setSelectedIndex(0);
+        llenadoMaterial();
+    }//GEN-LAST:event_jButton4MouseClicked
 
     /**
      * @param args the command line arguments
@@ -322,6 +353,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

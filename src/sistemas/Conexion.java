@@ -81,6 +81,15 @@ public class Conexion {
         } catch (Exception e) {
         }
     }
+    
+    public static void eliminarMaterial(String name){
+           String sql = "delete from material where nombreMaterial = '" + name + "'";
+           try {
+            PreparedStatement st = con.prepareStatement(sql);
+            st.executeUpdate();
+        } catch (Exception e) {
+        }
+    }
 
     public static void insertar(String nombre, String material, String fecha) throws SQLException {
 
