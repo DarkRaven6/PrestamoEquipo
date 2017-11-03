@@ -101,6 +101,8 @@ public class Conexion {
         }
 
     }
+    
+    
 
     public static void nuevoNombre(String nom) throws SQLException {
 
