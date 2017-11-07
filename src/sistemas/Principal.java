@@ -31,6 +31,7 @@ public class Principal extends javax.swing.JFrame {
         initComponents();
         Conexion.conexion();
         this.setTitle("Sistema para prestamo de equipo - TI");
+        setIconImage(new ImageIcon(getClass().getResource("/imagenes/icono.png")).getImage());
         this.setLocationRelativeTo(null);
         this.setSize(new Dimension(500, 450));
         this.setResizable(false);
@@ -170,6 +171,11 @@ public class Principal extends javax.swing.JFrame {
         jMenuBar1.add(jMenu6);
 
         jMenu2.setText("About");
+        jMenu2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu2MouseClicked(evt);
+            }
+        });
         jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
@@ -337,6 +343,14 @@ public class Principal extends javax.swing.JFrame {
         setVisible(false);
 
     }//GEN-LAST:event_jMenu6MouseClicked
+
+    private void jMenu2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu2MouseClicked
+
+        AcercaDe ac = new AcercaDe();
+        ac.setVisible(true);
+        setVisible(false);
+
+    }//GEN-LAST:event_jMenu2MouseClicked
 
     /**
      * @param args the command line arguments

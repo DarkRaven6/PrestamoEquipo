@@ -5,6 +5,7 @@
  */
 package sistemas;
 
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -19,6 +20,7 @@ public class AgregarDatos extends javax.swing.JFrame {
     public AgregarDatos() {
         initComponents();
         Conexion.conexion();
+        setIconImage(new ImageIcon(getClass().getResource("/imagenes/icono.png")).getImage());
         this.setTitle("Agregar nuevos usuarios y material");
         this.setLocationRelativeTo(null);
         this.setResizable(false);

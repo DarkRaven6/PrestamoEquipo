@@ -5,10 +5,13 @@
  */
 package sistemas;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import javax.swing.table.DefaultTableModel;
 import java.sql.*;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -17,13 +20,16 @@ import java.sql.*;
 public class RegistroFinal extends javax.swing.JFrame {
 
     public static DefaultTableModel modeloTabla;
+    private Dimension dim;
 
     public RegistroFinal() {
         modeloTabla = new DefaultTableModel(null, getColumnas());
         initComponents();
+        setIconImage(new ImageIcon(getClass().getResource("/imagenes/icono.png")).getImage());
         this.setTitle("Tabla de entregas");
-        this.setLocation(300, 150);
-        this.setSize(1350, 800);
+        this.setSize(Toolkit.getDefaultToolkit().getScreenSize());
+//this.setLocation(300, 150);
+//        this.setSize(1350, 800);
         tableDatos.setRowHeight(35);
         Conexion.conexion();
         setfilas();
@@ -89,7 +95,7 @@ public class RegistroFinal extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1306, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1304, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jButton1)))
@@ -99,10 +105,10 @@ public class RegistroFinal extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 878, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jButton1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(66, 66, 66))
         );
 
         pack();

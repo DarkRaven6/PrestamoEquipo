@@ -10,6 +10,7 @@ import java.sql.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.logging.*;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -24,6 +25,7 @@ public class MostrarRegistros extends javax.swing.JFrame {
 
         initComponents();
         Conexion.conexion();
+        setIconImage(new ImageIcon(getClass().getResource("/imagenes/icono.png")).getImage());
         Conexion.setFilas(modeloTabla);
         this.setTitle("Tabla de prestamos");
         this.setLocationRelativeTo(null);
