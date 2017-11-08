@@ -5,12 +5,15 @@
  */
 package sistemas;
 
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Image;
 import java.awt.Toolkit;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import javax.swing.table.DefaultTableModel;
 import java.sql.*;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
 /**
@@ -33,6 +36,8 @@ public class RegistroFinal extends javax.swing.JFrame {
         tableDatos.setRowHeight(35);
         Conexion.conexion();
         setfilas();
+        buttonIcon();
+        this.getContentPane().setBackground(Color.lightGray);
     }
 
     private String[] getColumnas() {
@@ -41,25 +46,35 @@ public class RegistroFinal extends javax.swing.JFrame {
 
         return columna;
     }
-    
-    private void setfilas(){
-    
+
+    private void setfilas() {
+
         Connection con = Conexion.con;
         String sql = "select nombre,material,fecha,fechafinal from reportefinal";
         try {
             PreparedStatement st = con.prepareStatement(sql);
             ResultSet res = st.executeQuery();
             Object datos[] = new Object[4];
-            
-            while (res.next()) {                
+
+            while (res.next()) {
                 for (int i = 0; i < 4; i++) {
-                    datos[i] = res.getObject(i+1);
+                    datos[i] = res.getObject(i + 1);
                 }
                 modeloTabla.addRow(datos);
             }
             res.close();
         } catch (Exception e) {
         }
+    }
+    String directory = System.getProperty("user.dir");
+
+    private void buttonIcon() {
+        String imageRoute;
+        imageRoute = directory + "\\imagenes\\" + "back.png";
+        ImageIcon imagen = new ImageIcon(imageRoute);
+        Icon icono = new ImageIcon(imagen.getImage().getScaledInstance(labelReturn.getWidth(), labelReturn.getHeight(), Image.SCALE_DEFAULT));
+        labelReturn.setIcon(icono);
+        this.repaint();
     }
 
     /**
@@ -73,7 +88,7 @@ public class RegistroFinal extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tableDatos = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        labelReturn = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -81,10 +96,9 @@ public class RegistroFinal extends javax.swing.JFrame {
         tableDatos.setModel(modeloTabla);
         jScrollPane1.setViewportView(tableDatos);
 
-        jButton1.setText("Ir a inicio");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        labelReturn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
+                labelReturnMouseClicked(evt);
             }
         });
 
@@ -94,39 +108,36 @@ public class RegistroFinal extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1304, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1)))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1304, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(labelReturn, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(23, 23, 23))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 878, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton1)
-                .addGap(66, 66, 66))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(labelReturn, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(42, 42, 42))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-
+    private void labelReturnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelReturnMouseClicked
         Principal p = new Principal();
         p.setVisible(true);
         setVisible(false);
-
-
-    }//GEN-LAST:event_jButton1MouseClicked
+    }//GEN-LAST:event_labelReturnMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel labelReturn;
     private javax.swing.JTable tableDatos;
     // End of variables declaration//GEN-END:variables
 

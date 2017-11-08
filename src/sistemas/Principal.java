@@ -5,7 +5,9 @@
  */
 package sistemas;
 
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Image;
 import java.text.DateFormat;
 import java.util.Date;
 import javax.swing.JFrame;
@@ -13,6 +15,7 @@ import java.text.SimpleDateFormat;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.logging.*;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
@@ -38,7 +41,40 @@ public class Principal extends javax.swing.JFrame {
         this.setVisible(true);
         llenadoNombre();
         llenadoMaterial();
+        buttonIcon();
+        this.getContentPane().setBackground(Color.lightGray);
+        buttonIcon3();
+        buttonIcon4();
 
+    }
+
+    String directory = System.getProperty("user.dir");
+
+    private void buttonIcon() {
+        String imageRoute;
+        imageRoute = directory + "\\imagenes\\" + "borrar.png";
+        ImageIcon imagen = new ImageIcon(imageRoute);
+        Icon icono = new ImageIcon(imagen.getImage().getScaledInstance(labelDel.getWidth(), labelDel.getHeight(), Image.SCALE_DEFAULT));
+        labelDel.setIcon(icono);
+        this.repaint();
+    }
+
+    private void buttonIcon3() {
+        String imageRoute;
+        imageRoute = directory + "\\imagenes\\" + "borrar.png";
+        ImageIcon imagen = new ImageIcon(imageRoute);
+        Icon icono = new ImageIcon(imagen.getImage().getScaledInstance(labelBorr.getWidth(), labelBorr.getHeight(), Image.SCALE_DEFAULT));
+        labelBorr.setIcon(icono);
+        this.repaint();
+    }
+
+    private void buttonIcon4() {
+        String imageRoute;
+        imageRoute = directory + "\\imagenes\\" + "save.png";
+        ImageIcon imagen = new ImageIcon(imageRoute);
+        Icon icono = new ImageIcon(imagen.getImage().getScaledInstance(labelSave.getWidth(), labelSave.getHeight(), Image.SCALE_DEFAULT));
+        labelSave.setIcon(icono);
+        this.repaint();
     }
 
     public void llenadoNombre() {
@@ -77,12 +113,12 @@ public class Principal extends javax.swing.JFrame {
         comboUsuario = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         txtFechaHora = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         comboMaterial = new javax.swing.JComboBox<>();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        labelDel = new javax.swing.JLabel();
+        labelBorr = new javax.swing.JLabel();
+        labelSave = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
@@ -97,12 +133,16 @@ public class Principal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel1.setText("Solicitante");
 
+        comboUsuario.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         comboUsuario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel2.setText("<html>\nFecha y hora <br>de la entrega\n</html>");
 
+        txtFechaHora.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         txtFechaHora.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 txtFechaHoraMouseClicked(evt);
@@ -114,35 +154,34 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jLabel3.setText("Descripcion");
+
+        comboMaterial.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        comboMaterial.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        labelDel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                labelDelMouseClicked(evt);
+            }
+        });
+
+        labelBorr.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                labelBorrMouseClicked(evt);
+            }
+        });
+
+        labelSave.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                labelSaveMouseClicked(evt);
+            }
+        });
+
         jButton1.setText("Generar");
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton1MouseClicked(evt);
-            }
-        });
-
-        jLabel3.setText("Descripcion");
-
-        comboMaterial.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jButton2.setText("Guardar");
-        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton2MouseClicked(evt);
-            }
-        });
-
-        jButton3.setText("Eliminar");
-        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton3MouseClicked(evt);
-            }
-        });
-
-        jButton4.setText("Eliminar");
-        jButton4.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton4MouseClicked(evt);
             }
         });
 
@@ -184,62 +223,65 @@ public class Principal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(61, 61, 61)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(labelDel, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(comboUsuario, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel1)
+                    .addComponent(comboMaterial, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 206, Short.MAX_VALUE)
+                                .addComponent(labelBorr, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jButton1)
+                                    .addComponent(txtFechaHora, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addContainerGap(106, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton4))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton3))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(41, 41, 41)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(comboUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel3)
-                                        .addGap(30, 30, 30))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel2)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(comboMaterial, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(4, 4, 4)
-                                        .addComponent(txtFechaHora, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
-                .addGap(85, 85, 85))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(labelSave, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(35, 35, 35))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(89, 89, 89)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(comboUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtFechaHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(comboMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton4)
-                .addGap(21, 21, 21)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(53, 53, 53))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(comboUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(labelDel, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(35, 35, 35)
+                                .addComponent(jLabel3)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(comboMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(labelBorr, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(28, 28, 28)
+                        .addComponent(txtFechaHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(39, 39, 39)))
+                .addGap(8, 8, 8)
+                .addComponent(labelSave, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(58, Short.MAX_VALUE))
         );
 
         pack();
@@ -254,21 +296,69 @@ public class Principal extends javax.swing.JFrame {
 
     }//GEN-LAST:event_txtFechaHoraMouseClicked
 
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+    private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MouseClicked
 
-        Date fecha = new Date();
-        DateFormat formatoFechaHora = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss ");
+        AgregarDatos aD = new AgregarDatos();
+        aD.setVisible(true);
+        setVisible(false);
 
-        String convert = formatoFechaHora.format(fecha);
+    }//GEN-LAST:event_jMenu1MouseClicked
 
-        txtFechaHora.setText(convert);
+    private void jMenu3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu3MouseClicked
 
-        System.out.println(formatoFechaHora.format(fecha));
+        MostrarRegistros mr = new MostrarRegistros();
+        mr.setVisible(true);
+        setVisible(false);
+    }//GEN-LAST:event_jMenu3MouseClicked
+
+    private void jMenu6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu6MouseClicked
+
+        RegistroFinal rf = new RegistroFinal();
+        rf.setVisible(true);
+        setVisible(false);
+
+    }//GEN-LAST:event_jMenu6MouseClicked
+
+    private void jMenu2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu2MouseClicked
+
+        AcercaDe ac = new AcercaDe();
+        ac.setVisible(true);
+        setVisible(false);
+
+    }//GEN-LAST:event_jMenu2MouseClicked
+
+    private void labelDelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelDelMouseClicked
+
+        String user = (String) comboUsuario.getSelectedItem();
+        try {
+            Conexion.eliminarUsuario(user);
+            JOptionPane.showMessageDialog(null, "El usuario fue eliminado");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "El usuario no pudo ser eliminado");
+        }
+
+        comboUsuario.setSelectedIndex(0);
+        llenadoNombre();
 
 
-    }//GEN-LAST:event_jButton1MouseClicked
+    }//GEN-LAST:event_labelDelMouseClicked
 
-    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+    private void labelBorrMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelBorrMouseClicked
+
+        String mat = (String) comboMaterial.getSelectedItem();
+        try {
+            Conexion.eliminarMaterial(mat);
+            JOptionPane.showMessageDialog(null, "El material fue eliminado");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "El material no pudo ser eliminado");
+        }
+
+        comboMaterial.setSelectedIndex(0);
+        llenadoMaterial();
+
+    }//GEN-LAST:event_labelBorrMouseClicked
+
+    private void labelSaveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelSaveMouseClicked
 
         String usuario = (String) comboUsuario.getSelectedItem();
 
@@ -286,71 +376,19 @@ public class Principal extends javax.swing.JFrame {
         txtFechaHora.setText(null);
         comboUsuario.setSelectedIndex(0);
         comboMaterial.setSelectedIndex(0);
-        
+    }//GEN-LAST:event_labelSaveMouseClicked
 
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
 
-    }//GEN-LAST:event_jButton2MouseClicked
+        Date fecha = new Date();
+        DateFormat formatoFechaHora = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss ");
 
-    private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MouseClicked
-        
-        AgregarDatos aD = new AgregarDatos();
-        aD.setVisible(true);
-        setVisible(false);
-       
-    }//GEN-LAST:event_jMenu1MouseClicked
+        String convert = formatoFechaHora.format(fecha);
 
-    private void jMenu3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu3MouseClicked
-        
-        MostrarRegistros mr = new MostrarRegistros();
-        mr.setVisible(true);
-        setVisible(false);
-    }//GEN-LAST:event_jMenu3MouseClicked
+        txtFechaHora.setText(convert);
 
-    private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
-
-        String user = (String) comboUsuario.getSelectedItem();
-        try {
-            Conexion.eliminarUsuario(user);
-            JOptionPane.showMessageDialog(null, "El usuario fue eliminado");
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "El usuario no pudo ser eliminado");
-        }
-        
-        comboUsuario.setSelectedIndex(0);
-        llenadoNombre();
-        
-
-    }//GEN-LAST:event_jButton3MouseClicked
-
-    private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
-
-        String mat = (String) comboMaterial.getSelectedItem();
-        try {
-            Conexion.eliminarMaterial(mat);
-            JOptionPane.showMessageDialog(null, "El material fue eliminado");
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "El material no pudo ser eliminado");
-        }
-        
-        comboMaterial.setSelectedIndex(0);
-        llenadoMaterial();
-    }//GEN-LAST:event_jButton4MouseClicked
-
-    private void jMenu6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu6MouseClicked
-
-        RegistroFinal rf = new RegistroFinal();
-        rf.setVisible(true);
-        setVisible(false);
-
-    }//GEN-LAST:event_jMenu6MouseClicked
-
-    private void jMenu2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu2MouseClicked
-
-        AcercaDe ac = new AcercaDe();
-        ac.setVisible(true);
-        setVisible(false);
-
-    }//GEN-LAST:event_jMenu2MouseClicked
+        System.out.println(formatoFechaHora.format(fecha));
+    }//GEN-LAST:event_jButton1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -391,9 +429,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> comboMaterial;
     private javax.swing.JComboBox<String> comboUsuario;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -405,6 +440,9 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuBar jMenuBar2;
+    private javax.swing.JLabel labelBorr;
+    private javax.swing.JLabel labelDel;
+    private javax.swing.JLabel labelSave;
     private javax.swing.JTextField txtFechaHora;
     // End of variables declaration//GEN-END:variables
 }

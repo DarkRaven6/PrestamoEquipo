@@ -5,12 +5,16 @@
  */
 package sistemas;
 
+import java.awt.Color;
+import java.awt.Image;
 import javax.swing.table.DefaultTableModel;
 import java.sql.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.logging.*;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 
 /**
  *
@@ -31,6 +35,22 @@ public class MostrarRegistros extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         this.setSize(500, 400);
+        buttonIcon();
+        this.getContentPane().setBackground(Color.lightGray);
+        
+    }
+    
+    
+
+    String directory = System.getProperty("user.dir");
+
+    private void buttonIcon() {
+        String imageRoute;
+        imageRoute = directory + "\\imagenes\\" + "back.png";
+        ImageIcon imagen = new ImageIcon(imageRoute);
+        Icon icono = new ImageIcon(imagen.getImage().getScaledInstance(labelButton.getWidth(), labelButton.getHeight(), Image.SCALE_DEFAULT));
+        labelButton.setIcon(icono);
+        this.repaint();
     }
 
     private String[] getColumnas() {
@@ -56,7 +76,6 @@ public class MostrarRegistros extends javax.swing.JFrame {
 //        } catch (Exception e) {
 //        }
 //    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -68,7 +87,7 @@ public class MostrarRegistros extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tableDatos = new javax.swing.JTable();
-        jButton2 = new javax.swing.JButton();
+        labelButton = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -83,10 +102,9 @@ public class MostrarRegistros extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tableDatos);
 
-        jButton2.setText("Ir a inicio");
-        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+        labelButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton2MouseClicked(evt);
+                labelButtonMouseClicked(evt);
             }
         });
 
@@ -94,14 +112,15 @@ public class MostrarRegistros extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 476, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2)))
+                        .addComponent(labelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(8, 8, 8))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 476, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -109,20 +128,13 @@ public class MostrarRegistros extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
-                .addComponent(jButton2)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(labelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
-
-        Principal p = new Principal();
-        p.setVisible(true);
-        setVisible(false);
-    }//GEN-LAST:event_jButton2MouseClicked
 
     private void tableDatosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableDatosMouseClicked
 
@@ -141,7 +153,7 @@ public class MostrarRegistros extends javax.swing.JFrame {
         } catch (Exception e) {
         }
         modeloTabla.removeRow(tableDatos.getSelectedRow());
-        
+
 //        String sqldelete = "delete from reporteprestamo where fecha = '" + tableDatos.getValueAt(tableDatos.getSelectedRow(), 2)+"'";
 //        try {
 //            PreparedStatement us = c.prepareStatement(sqldelete);
@@ -149,28 +161,33 @@ public class MostrarRegistros extends javax.swing.JFrame {
 //        } catch (Exception e) {
 //        }
 
-
     }//GEN-LAST:event_tableDatosMouseClicked
 
     private void tableDatosMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableDatosMouseReleased
-        
+
         Connection co = Conexion.con;
-                String sqldelete = "delete from reporteprestamo where fecha = '" + tableDatos.getValueAt(tableDatos.getSelectedRow(), 2)+"'";
+        String sqldelete = "delete from reporteprestamo where fecha = '" + tableDatos.getValueAt(tableDatos.getSelectedRow(), 2) + "'";
         try {
             PreparedStatement us = co.prepareStatement(sqldelete);
             us.executeUpdate();
         } catch (Exception e) {
         }
-        
+
         System.out.println(tableDatos.getValueAt(tableDatos.getSelectedRow(), 2));
 
 
     }//GEN-LAST:event_tableDatosMouseReleased
 
+    private void labelButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelButtonMouseClicked
+        Principal p = new Principal();
+        p.setVisible(true);
+        setVisible(false);
+    }//GEN-LAST:event_labelButtonMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel labelButton;
     private javax.swing.JTable tableDatos;
     // End of variables declaration//GEN-END:variables
 
@@ -184,5 +201,4 @@ public class MostrarRegistros extends javax.swing.JFrame {
 //        return palabra;
 //
 //    }
-
 }

@@ -5,6 +5,7 @@
  */
 package sistemas;
 
+import java.awt.Color;
 import javax.swing.ImageIcon;
 
 /**
@@ -23,6 +24,7 @@ public class AcercaDe extends javax.swing.JFrame {
         this.setTitle("Acerca de");
         this.setSize(400, 350);
         this.setLocationRelativeTo(null);
+        this.getContentPane().setBackground(Color.lightGray);
     }
 
     /**
